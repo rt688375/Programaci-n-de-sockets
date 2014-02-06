@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+
+typedef struct nodo{
+	int algo;
+	struct nodo*siguiente;
+	struct nodo*anterior;
+} Nodo;
+
+Nodo*Cabeza;
+Nodo*Cola;
+Nodo*cent;
+
+void nuevo(int x){
+
+	Nodo*nuevo;
+	nuevo=(Nodo*)malloc(sizeof(Nodo));
+	nuevo->algo=x;
+	nuevo->anterior=Cola;
+	nuevo->siguiente=NULL;
+	Cola->siguiente=nuevo;
+	Cola=nuevo;
+}
+
+int main(){
+
+	setvbuf(stdout, NULL, _IONBF, 0);
+
+	Cola=(Nodo*)malloc(sizeof(Nodo));
+	Cola->algo=2;
+	Cola->anterior=NULL;
+	Cola->siguiente=NULL;
+
+	Cabeza=(Nodo*)malloc(sizeof(Nodo));
+	Cabeza->algo=1;
+	Cabeza->anterior=NULL;
+	Cabeza->siguiente=Cola;
+
+	Cola->anterior=Cabeza;
+
+	nuevo(3);
+	nuevo(4);
+	nuevo(5);
+	nuevo(6);
+
+	cent=Cabeza;
+	while(cent!=NULL){
+		printf("%d\n",cent->algo);
+		cent=cent->siguiente;
+	}
+
+	return 0;
+}
